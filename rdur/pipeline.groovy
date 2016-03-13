@@ -26,10 +26,12 @@ node('master') {
 
 node ('ubuntu-server') {
    stage 'Deploy'
-   sh "rm -rf ./war"
-   
-   unarchive mapping: ['war/target/jenkins.war' : '.']
-   sh "ls -lR"
+   sh "sudo service tomcat7 stop"
+   sh "rm -f /var/lib/tomcat7/webapps/jenkins.war"
+   sh "rm -rf /var/lib/tomcat7/webapps/jenkins"
+
+   unarchive mapping: ['war/target/jenkins.war' : '/var/lib/tomcat7/webapps']
+   sh "sudo service tomcat7 start"
 }
 
 
