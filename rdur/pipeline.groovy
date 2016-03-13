@@ -27,10 +27,11 @@ node('master') {
 node ('ubuntu-server') {
    stage 'Deploy'
    sh "sudo service tomcat7 stop"
-   sh "if [ -f /var/lib/tomcat7/webapps/jenkins.war ]; then  rm -f /var/lib/tomcat7/webapps/jenkins.war; fi"
-   sh "if [ -d /var/lib/tomcat7/webapps/jenkins ]; then rm -rf /var/lib/tomcat7/webapps/jenkins; fi"
+   sh "sudo if [ -f /var/lib/tomcat7/webapps/jenkins.war ]; then  rm -f /var/lib/tomcat7/webapps/jenkins.war; fi"
+   sh "sudo if [ -d /var/lib/tomcat7/webapps/jenkins ]; then rm -rf /var/lib/tomcat7/webapps/jenkins; fi"
 
-   unarchive mapping: ['war/target/jenkins.war' : '/var/lib/tomcat7/webapps']
+   unarchive mapping: ['war/target/jenkins.war' : '.']
+   sh "sudo cp ./jenkins.war /var/lib/tomcat7/";
    sh "sudo service tomcat7 start"
 }
 
