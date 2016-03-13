@@ -1,4 +1,5 @@
 // Standard Github copyright
+// We can change the labels for the nodes as needed
 
 node('master') {
   // Mark the code checkout 'stage'....
