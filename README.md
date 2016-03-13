@@ -5,9 +5,10 @@ In a nutshell, Jenkins is the leading open-source automation server.
 Built with Java, it provides over 1000 plugins to support automating virtually anything, 
 so that humans can actually spend their time doing things machines cannot.
 
-Added a test line - Roshan
 
-Change - Roshan`
+# Changes
+I've added a jenkinsfile that's custom to my location at ./rdur/pipeline
+Eventually I'll split this out into a separate repo
 
 # What to Use Jenkins for and When to Use It
 
