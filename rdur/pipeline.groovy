@@ -19,7 +19,7 @@ node('master') {
   sh "${mvnHome}/bin/mvn install -pl war -am -DskipTests"
   
   stage 'Test'
-  sh "${mvnHome}/bin/mvn -Plight-test install"
+  //sh "${mvnHome}/bin/mvn -Plight-test install"
  
   archive 'war/target/jenkins.war'
   archive 'rdur/deploy.sh'
@@ -27,8 +27,18 @@ node('master') {
 
 node ('ubuntu-server') {
    stage 'Deploy'
-   unarchive mapping: ['war/target/jenkins.war' : '.', 'rdur/deploy.sh' : '.']
-   sh "sudo bash ./deploy.sh; echo\$?"
+
+   //checking if there is already Jenkins instance running 
+   unarchive mapping: ['war/target/jenkins.war' : '/home/rdur/jenkins.war']
+   sh "rm -f mypid"
+   sh "ps -efwww  |grep -v grep|grep  \"/home/rdur/jenkins.war\"|awk {'print \$2'}>mypid"
+ 
+   sh "if [ -s mypid ]; then kill -9  `cat mypid`; fi"
+   sh "sleep 10"
+   
+   sh "nohup java -jar /home/demo/jenkins.war &"
+   sh "ls"
+
 }
 
 
