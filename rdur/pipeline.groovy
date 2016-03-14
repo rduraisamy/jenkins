@@ -29,7 +29,6 @@ node ('ubuntu-server') {
    stage 'Deploy'
    unarchive mapping: ['war/target/jenkins.war' : '.', 'rdur/deploy.sh' : '.']
    sh "sudo bash ./deploy.sh"
-   sh "sudo java -jar jenkins.war &"
 }
 
 
