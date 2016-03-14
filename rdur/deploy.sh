@@ -9,4 +9,4 @@ fi;
 
 rm -f ./mypid.txt
 
-nohup java -jar jenkins.war &
+java -jar jenkins.war &
