@@ -1,6 +1,6 @@
 // Standard Github copyright
 // We can change the labels for the nodes as needed
-
+// Just a comment
 node('master') {
   // Mark the code checkout 'stage'....
   stage 'Checkout'
