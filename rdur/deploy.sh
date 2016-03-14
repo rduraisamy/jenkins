@@ -10,6 +10,6 @@ fi;
 rm -f ./mypid.txt
 
 export JENKINS_HOME=/home/rdur/.jenkins
-java -jar jenkins.war &
+nohup java -jar jenkins.war &
 
-exit 0;
+exit 0
