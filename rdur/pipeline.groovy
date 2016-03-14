@@ -27,9 +27,9 @@ node('master') {
 node ('ubuntu-server') {
    stage 'Deploy'
 
-   sh "export pid=`ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`
+   sh "export pid=`ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`"
 
-   sh "if [ ! -z ${pid} ]; then kill -9 `ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`;  fi "
+   sh "if [ ! -z \${pid} ]; then kill -9 \${pid};  fi "
    unarchive mapping: ['war/target/jenkins.war' : '.']
    sh "nohup java -jar jenkins.war &"
 
