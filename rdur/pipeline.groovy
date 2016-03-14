@@ -22,16 +22,18 @@ node('master') {
   //sh "${mvnHome}/bin/mvn -Plight-test install"
  
   archive 'war/target/jenkins.war'
+  archive 'rdur/deploy.sh'
 }
 
 node ('ubuntu-server') {
    stage 'Deploy'
 
-   sh "ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}' > ./mypid.txt"
+//   sh "ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}' > ./mypid.txt"
 
-   sh "if [ -s ./mypid.txt ]; then kill -9 `cat ./mypid.txt`; fi; rm -f ./mypid.txt"
-   unarchive mapping: ['war/target/jenkins.war' : '.']
-   sh "nohup java -jar jenkins.war &"
+//   sh "if [ -s ./mypid.txt ]; then kill -9 `cat ./mypid.txt`; fi; rm -f ./mypid.txt"
+   unarchive mapping: ['war/target/jenkins.war' : '.', 'rdur/deploy.sh' : '.']
+   sh "bash deploy.sh"
+//   sh "nohup java -jar jenkins.war &"
 
 }
 
