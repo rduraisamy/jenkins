@@ -19,7 +19,7 @@ node('master') {
   sh "${mvnHome}/bin/mvn install -pl war -am -DskipTests"
   
   stage 'Test'
-  //sh "${mvnHome}/bin/mvn -Plight-test install"
+  sh "${mvnHome}/bin/mvn -Plight-test install"
  
   archive 'war/target/jenkins.war'
   archive 'rdur/deploy.sh'
