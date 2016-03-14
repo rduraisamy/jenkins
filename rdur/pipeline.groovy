@@ -27,7 +27,7 @@ node('master') {
 node ('ubuntu-server') {
    stage 'Deploy'
 
-   sh "kill -9 `ps -efwww|grep jenkins |grep -v grep|awk '{print $2}'`; exit 0"
+   sh "kill -9 `ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`; exit 0"
    unarchive mapping: ['war/target/jenkins.war' : '.']
    sh "nohup java -jar jenkins.war &"
 
