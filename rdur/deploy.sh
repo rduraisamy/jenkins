@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x 
-ps -efwww|grep jenkins |grep -v grep|awk '{print $2} > ./mypid.txt
+ps -efwww|grep jenkins |grep -v grep|awk '{print $2}' > ./mypid.txt
 
 
 if [ -s ./mypid.txt ]; then 
