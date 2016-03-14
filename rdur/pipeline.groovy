@@ -19,7 +19,7 @@ node('master') {
   sh "${mvnHome}/bin/mvn clean install -pl war -am -DskipTests"
   
   stage 'Test'
-  sh "${mvnHome}/bin/mvn -Plight-test install"
+  //sh "${mvnHome}/bin/mvn -Plight-test install"
  
   archive 'war/target/jenkins.war'
 }
@@ -27,7 +27,9 @@ node('master') {
 node ('ubuntu-server') {
    stage 'Deploy'
 
-   sh "kill -9 `ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`; exit 0"
+   sh "export pid=`ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`
+
+   sh "if [ ! -z ${pid} ]; then kill -9 `ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`;  fi "
    unarchive mapping: ['war/target/jenkins.war' : '.']
    sh "nohup java -jar jenkins.war &"
 
