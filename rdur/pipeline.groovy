@@ -40,7 +40,7 @@ node ('ubuntu-server') {
    sh "sleep 10"
 
    // install the latest jenkins   
-   sh "nohup java -jar /home/rdur/jenkins.war &"
+   sh "sudo nohup java -jar /home/rdur/jenkins.war &"
    sh "ls"
 
 }
