@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x 
+set -x -e 
 ps -efwww|grep jenkins |grep -v grep|awk '{print $2}' > ./mypid.txt
 
 
