@@ -16,7 +16,7 @@ node('master') {
   // Mark the code build 'stage'....
   stage 'Build'
   // Run the maven build
-  sh "${mvnHome}/bin/mvn clean install -pl war -am -DskipTests"
+  sh "${mvnHome}/bin/mvn install -pl war -am -DskipTests"
   
   stage 'Test'
   //sh "${mvnHome}/bin/mvn -Plight-test install"
@@ -27,9 +27,9 @@ node('master') {
 node ('ubuntu-server') {
    stage 'Deploy'
 
-   sh "export pid=`ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}'`"
+   sh "ps -efwww|grep jenkins |grep -v grep|awk '{print \$2}' > mypid.txt"
 
-   sh "if [ ! -z \${pid} ]; then kill -9 \${pid};  fi "
+   sh "if [ -s mypid.txt ]; then kill -9 `cat mypid.txt`;rm -f mypid.txt;  fi "
    unarchive mapping: ['war/target/jenkins.war' : '.']
    sh "nohup java -jar jenkins.war &"
 
