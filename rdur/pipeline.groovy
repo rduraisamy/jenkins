@@ -28,8 +28,8 @@ node('master') {
 node ('ubuntu-server') {
    stage 'Deploy'
    unarchive mapping: ['war/target/jenkins.war' : '.', 'rdur/deploy.sh' : '.']
-   sh "bash ./deploy.sh"
-   sh "java -jar jenkins.war &"
+   sh "sudo bash ./deploy.sh"
+   sh "sudo java -jar jenkins.war &"
 }
 
 
