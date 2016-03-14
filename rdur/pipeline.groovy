@@ -36,7 +36,7 @@ node ('ubuntu-server') {
    sh "if [ -s mypid ]; then kill -9  `cat mypid`; fi"
    sh "sleep 10"
    
-   sh "nohup java -jar /home/demo/jenkins.war &"
+   sh "nohup java -jar /home/rdur/jenkins.war &"
    sh "ls"
 
 }
