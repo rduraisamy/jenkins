@@ -1,6 +1,6 @@
 // Standard Github copyright
 // We can change the labels for the nodes as needed
-// Just a comment
+
 node('master') {
   // Mark the code checkout 'stage'....
   stage 'Checkout'
@@ -20,7 +20,7 @@ node('master') {
  
   // Run the maven tests 
   stage 'Test'
-  // sh "${mvnHome}/bin/mvn -Plight-test install"
+  sh "${mvnHome}/bin/mvn -Plight-test install"
  
   // Archive the artifacts that will be used for deployment
   archive 'war/target/jenkins.war'
