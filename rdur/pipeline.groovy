@@ -36,7 +36,7 @@ node ('ubuntu-server') {
    sh "rm -f mypid"
    sh "ps -efwww  |grep -v grep|grep  \"/home/rdur/jenkins.war\"|awk {'print \$2'}>mypid"
  
-   sh "if [ -s mypid ]; then kill -9  `cat mypid`; fi"
+   sh "if [ -s mypid ]; then sudo kill -9  `cat mypid`; fi"
    sh "sleep 10"
 
    // install the latest jenkins   
