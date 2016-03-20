@@ -1,6 +1,5 @@
 // Standard Github copyright
-// We can change the labels for the nodes as needed
-
+// Original author: Roshan Duraisamy
 node('master') {
   // Mark the code checkout 'stage'....
   stage 'Checkout'
