@@ -1,6 +1,8 @@
 // Standard Github copyright
 // Original author: Roshan Duraisamy
 // 2016 - March 
+
+
 node('master') {
   // Mark the code checkout 'stage'....
   stage 'Checkout'
@@ -25,6 +27,9 @@ node('master') {
   // Archive the artifacts that will be used for deployment
   archive 'war/target/jenkins.war'
 }
+
+
+// This is the deployment node, currently an ubuntu server box
 
 node ('ubuntu-server') {
    stage 'Deploy'
