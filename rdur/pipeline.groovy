@@ -22,7 +22,7 @@ node('master') {
  
   // Run the maven tests 
   stage 'Test'
-  sh "${mvnHome}/bin/mvn -Plight-test install"
+  sh "export MAVEN_OPTS=-Xmx512m; ${mvnHome}/bin/mvn -Plight-test install"
  
   // Archive the artifacts that will be used for deployment
   archive 'war/target/jenkins.war'
