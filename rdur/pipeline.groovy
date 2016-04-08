@@ -7,10 +7,11 @@
 def nodeExecs = [:]
 
 for (int i = 0; i < 5; i++) {
-   nodeExecs["Stage${i}"] = {
+   def index = i;
+   nodeExecs["Stage ${index}"] = {
       node('master') {
-         stage "PS ${i}";
-         sh "echo Hello World ${i}";
+         stage "PS ${index}";
+         sh "echo Hello World ${index}";
       }
    }
 }
@@ -37,7 +38,7 @@ node('master') {
  
   // Run the maven tests 
   stage 'Test'
-  sh "export MAVEN_OPTS=-Xmx512m; ${mvnHome}/bin/mvn -Plight-test install"
+  //sh "export MAVEN_OPTS=-Xmx512m; ${mvnHome}/bin/mvn -Plight-test install"
  
   // Archive the artifacts that will be used for deployment
   archive 'war/target/jenkins.war'
