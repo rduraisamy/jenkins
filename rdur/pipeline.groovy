@@ -3,6 +3,21 @@
 // 2016 - March 
 // 
 
+// build up the parallel node execution
+def nodeExecs = [:]
+
+for (int i = 0; i < 5; i++) {
+   nodeExecs["Stage${i}"] = {
+      node('master') {
+         stage 'Parallel Stage ${i}';
+         sh "echo Hello World ${i}";
+      }
+   }
+}
+
+parallel nodeExecs
+
+
 node('master') {
   // Mark the code checkout 'stage'....
   stage 'Checkout'
@@ -28,20 +43,6 @@ node('master') {
   archive 'war/target/jenkins.war'
 }
 
-
-// build up the parallel node execution
-def nodeExecs = [:]
-
-for (int i = 0; i < 5; i++) {
-   nodeExecs["Stage${i}"] = {
-      node('master') {
-         stage 'Parallel Stage ${i}';
-         sh "echo Hello World ${i}";
-      }
-   }
-}
-
-parallel nodeExecs
 
 // This is the deployment node, currently an ubuntu server box
 
