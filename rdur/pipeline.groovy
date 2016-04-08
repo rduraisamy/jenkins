@@ -9,7 +9,8 @@ def nodeExecs = [:]
 for (int i = 0; i < 5; i++) {
    nodeExecs["Stage${i}"] = {
       node('master') {
-         stage 'Parallel Stage ${i}';
+         def stageName = "Parallel Stage ${i}";
+         stage stageName;
          sh "echo Hello World ${i}";
       }
    }
