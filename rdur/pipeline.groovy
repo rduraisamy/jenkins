@@ -29,6 +29,20 @@ node('master') {
 }
 
 
+// build up the parallel node execution
+def nodeExecs = [:]
+
+for (int i = 0; i < 5; i++) {
+   nodeExecs["Stage${i}"] = {
+      node('master') {
+         stage 'Parallel Stage ${i}';
+         sh "echo Hello World ${i}";
+      }
+   }
+}
+
+parallel nodeExecs
+
 // This is the deployment node, currently an ubuntu server box
 
 node ('ubuntu-server') {
