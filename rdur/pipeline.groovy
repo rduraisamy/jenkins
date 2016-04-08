@@ -4,13 +4,14 @@
 // 
 
 // build up the parallel node execution
+
+stage name: 'Parallel', concurrency: 5
 def nodeExecs = [:]
 
 for (int i = 0; i < 5; i++) {
    def index = i;
    nodeExecs["Stage ${index}"] = {
       node('master') {
-         stage "PS ${index}";
          sh "echo Hello World ${index}";
       }
    }
